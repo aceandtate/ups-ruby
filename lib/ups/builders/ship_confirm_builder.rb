@@ -78,6 +78,15 @@ module UPS
         shipment_root << reference_number(opts[:code], opts[:value])
       end
 
+      # Adds ReturnService to the XML document being built
+      #
+      # @param [String|Integer] code The return code to use
+      #
+      # @return [void]
+      def add_return_service(code)
+        shipment_root << return_service(code)
+      end
+
       private
 
       def gif?(string)
@@ -116,6 +125,12 @@ module UPS
         multi_valued('InvoiceLineTotal',
                      'CurrencyCode' => currency_code.to_s,
                      'MonetaryValue' => value.to_s)
+      end
+
+      def return_service(code)
+        Element.new('ReturnService').tap do |return_service|
+          return_service << element_with_value('Code', code.to_s)
+        end
       end
     end
   end

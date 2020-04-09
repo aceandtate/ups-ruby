@@ -19,6 +19,7 @@ class UPS::Builders::TestShipConfirmBuilder < Minitest::Test
       builder.add_shipment_delivery_confirmation '2'
       builder.add_shipment_direct_delivery_only
       builder.add_invoice_line_total('12', "GBP")
+      builder.add_return_service('9')
     end
   end
 
